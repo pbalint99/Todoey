@@ -10,7 +10,7 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
-    let itemArray = ["Alma", "Süti", "Fagyi"]
+    var itemArray = ["Alma", "Süti", "Fagyi"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +55,34 @@ class TodoListViewController: UITableViewController {
         
     }
     
+    //MARK - Add new items
+    
+    @IBAction func AddButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Új elem hozzáadása", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Hozzáadás", style: .default) { (action) in
+            //What will happen when the user clicks the add item button
+            
+            self.itemArray.append(textField.text!)
+            
+            self.tableView.reloadData()
+            
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Új elem"
+            textField = alertTextField
+            
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
     
     
     
